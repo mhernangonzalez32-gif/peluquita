@@ -17,6 +17,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps ./apps
 COPY --from=deps /app/packages ./packages
 COPY . .
+# El postinstall corre antes del COPY (sin schema a la vista): generar acá,
+# con el código ya copiado, para que `next build` tenga los tipos de Prisma.
+RUN pnpm db:generate
 RUN NEXT_STANDALONE=1 pnpm --filter @peluquita/web build
 
 FROM node:24-alpine AS runner

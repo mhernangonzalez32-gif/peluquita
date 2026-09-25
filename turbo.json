@@ -5,7 +5,8 @@
     "build": {
       "dependsOn": ["^build", "typecheck"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "dist/**"]
+      "outputs": [".next/**", "dist/**"],
+      "env": ["DATABASE_URL", "SESSION_SECRET"]
     },
     "lint": {
       "inputs": ["$TURBO_DEFAULT$"]
