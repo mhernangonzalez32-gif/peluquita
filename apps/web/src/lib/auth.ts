@@ -1,7 +1,5 @@
 import { jwtVerify, SignJWT } from "jose";
 
-export const ADMIN_COOKIE = "peluquita_admin";
-
 function secret(): Uint8Array {
   const value = process.env.SESSION_SECRET;
   if (value && value.length >= 16) return new TextEncoder().encode(value);

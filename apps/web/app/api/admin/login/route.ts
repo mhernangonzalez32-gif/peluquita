@@ -3,7 +3,8 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-import { ADMIN_COOKIE, createSession } from "@/lib/auth";
+import { createSession } from "@/lib/auth";
+import { ADMIN_COOKIE } from "@/lib/cookies";
 
 const loginSchema = z.object({
   email: z.string().email("Email inválido"),

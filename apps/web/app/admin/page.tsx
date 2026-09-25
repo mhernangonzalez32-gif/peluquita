@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { getSalonConfig } from "@/lib/config";
 import { getDb } from "@/lib/db";
+import { requireAdminPage } from "@/lib/session";
 import { AgendaButtons } from "./actions";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -41,6 +42,7 @@ export default async function AdminAgenda({
   searchParams: Promise<{ fecha?: string }>;
 }) {
   const { fecha } = await searchParams;
+  await requireAdminPage();
   const config = await getSalonConfig();
   const day =
     fecha !== undefined && /^\d{4}-\d{2}-\d{2}$/.test(fecha) ? fecha : todayBA(config.timeZone);

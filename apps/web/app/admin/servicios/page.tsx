@@ -1,8 +1,10 @@
 import { getDb } from "@/lib/db";
+import { requireAdminPage } from "@/lib/session";
 
 import { ServicesManager } from "./services-manager";
 
 export default async function AdminServicios() {
+  await requireAdminPage();
   const services = await getDb().service.findMany({ orderBy: { name: "asc" } });
   return (
     <div>

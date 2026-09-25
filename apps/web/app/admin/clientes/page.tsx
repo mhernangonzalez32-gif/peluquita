@@ -1,7 +1,9 @@
 import { getDb } from "@/lib/db";
+import { requireAdminPage } from "@/lib/session";
 import Link from "next/link";
 
 export default async function AdminClientes() {
+  await requireAdminPage();
   const clients = await getDb().client.findMany({
     orderBy: { name: "asc" },
     include: { _count: { select: { appointments: true } } },

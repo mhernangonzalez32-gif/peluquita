@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getSalonConfig } from "@/lib/config";
+import { requireAdminPage } from "@/lib/session";
 
 const STATUS_LABEL: Record<string, string> = {
   CONFIRMADO: "Confirmado",
@@ -24,6 +25,7 @@ function formatDateTime(iso: string | Date, timeZone: string): string {
 
 export default async function AdminClienteDetalle({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  await requireAdminPage();
   const config = await getSalonConfig();
   const client = await getDb().client.findUnique({
     where: { id },
