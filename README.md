@@ -86,7 +86,9 @@ pnpm db:studio    # UI de Prisma para inspeccionar datos
 
 ## Deploy
 
-- **Web → Vercel**: `vercel.json` apunta a `apps/web`. Preview automático en cada PR,
+- **Web → Vercel**: proyecto conectado al repo con **Root Directory = `apps/web`**
+  (así Vercel detecta Next.js en `apps/web/package.json` e instala el workspace
+  con pnpm desde el lockfile de la raíz). Preview automático en cada PR,
   producción en `main`.
 - **API → Railway**: contenedor desde `apps/api/Dockerfile`. Ver `apps/api/README.md`.
 - **Postgres prod**: instancia administrada en Railway (aprovisionar en el change de deploy).
