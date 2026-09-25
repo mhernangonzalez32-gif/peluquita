@@ -8,9 +8,57 @@ datasource db {
 }
 
 // Tabla mínima de fundación: demuestra el flujo de migraciones.
-// El dominio real (negocios, profesionales, turnos) llega en changes de producto.
+// También guarda config del local (horarios, WhatsApp, datos landing).
 model SystemConfig {
   key       String   @id
   value     String
   updatedAt DateTime @updatedAt
+}
+
+// Cliente identificado por teléfono (sin cuentas ni contraseñas).
+model Client {
+  id           String        @id @default(cuid())
+  phone        String        @unique
+  name         String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+}
+
+model Service {
+  id           String        @id @default(cuid())
+  name         String
+  price        Int
+  durationMin  Int
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+}
+
+enum AppointmentStatus {
+  CONFIRMADO
+  CANCELADO
+  COMPLETADO
+}
+
+model Appointment {
+  id        String            @id @default(cuid())
+  clientId  String
+  client    Client            @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  serviceId String
+  service   Service           @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  startAt   DateTime
+  status    AppointmentStatus @default(CONFIRMADO)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([startAt])
+  @@index([clientId])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
 }

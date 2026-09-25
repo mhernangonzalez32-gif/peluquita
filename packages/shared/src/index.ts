@@ -25,3 +25,8 @@ export function slugify(input: string): string {
 export function healthPayload(): { status: "ok" } {
   return { status: "ok" };
 }
+
+// Sin extensión .js a propósito: Next/webpack no resuelve el mapeo
+// `./x.js` → `./x.ts` en el bundle de producción (solo TS/Vite/tsx lo hacen).
+export * from "./slots";
+export * from "./validation";

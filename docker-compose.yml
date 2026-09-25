@@ -19,5 +19,33 @@ services:
       timeout: 5s
       retries: 10
 
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: peluquita-api
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: peluquita-web
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      HOSTNAME: "0.0.0.0"
+    depends_on:
+      - api
+    restart: unless-stopped
+
 volumes:
   peluquita-pgdata:

@@ -23,6 +23,7 @@
     "db:studio": "prisma studio --schema packages/db/prisma/schema.prisma",
     "db:reset": "prisma migrate reset --force --schema packages/db/prisma/schema.prisma",
     "db:status": "prisma migrate status --schema packages/db/prisma/schema.prisma",
+    "db:seed": "tsx packages/db/prisma/seed.ts",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "prisma": "catalog:",
     "lint-staged": "catalog:",
     "prettier": "catalog:",
+    "tsx": "catalog:",
     "turbo": "catalog:"
   },
   "lint-staged": {
@@ -41,6 +43,14 @@
     ],
     "*.{json,md,yml,yaml}": [
       "prettier --write"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma",
+      "esbuild"
     ]
   }
 }

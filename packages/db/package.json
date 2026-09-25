@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "catalog:"
+    "@prisma/client": "catalog:",
+    "bcryptjs": "catalog:"
   },
   "devDependencies": {
     "@peluquita/config": "workspace:*",
