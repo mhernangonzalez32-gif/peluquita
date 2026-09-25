@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+dist/
+build/
+.turbo/
+
+# TypeScript
+*.tsbuildinfo
+
+# Test artifacts
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# Deploy
+.vercel/
+
+# Env (never commit secrets; .env.example is the template)
+.env*
+!.env.example
+
+# OS / logs
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

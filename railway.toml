@@ -1,0 +1,12 @@
+# Config de deploy de apps/api en Railway.
+# Usa el mismo Dockerfile verificado en local (tarea 5.3):
+#   docker build -f apps/api/Dockerfile -t peluquita-api .
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "apps/api/Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"

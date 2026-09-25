@@ -1,0 +1,15 @@
+# IMPORTANTE: en .dockerignore los patrones SIN slash anclan a la raíz
+# (no flotan como en .gitignore). Para excluir directorios anidados
+# (apps/*/node_modules, packages/*/node_modules, etc. — que en Windows
+# son junctions con rutas absolutas y romperían la imagen) usar prefijo **/.
+**/node_modules
+**/.next
+**/dist
+**/.git
+**/.turbo
+**/coverage
+**/playwright-report
+**/test-results
+**/.env*
+**/*.log
+Dockerfile.probe

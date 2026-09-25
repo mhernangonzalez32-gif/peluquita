@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: peluquita-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: peluquita
+      POSTGRES_PASSWORD: peluquita
+      POSTGRES_DB: peluquita
+    # Host 5433: en máquinas con un PostgreSQL nativo en 5432 (común en
+    # Windows) se evita la colisión. El contenedor sigue en 5432 interno.
+    ports:
+      - "5433:5432"
+    volumes:
+      - peluquita-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U peluquita -d peluquita"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  peluquita-pgdata:

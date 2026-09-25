@@ -1,0 +1,3 @@
+# Normalizar todo a LF en el repo y en los checkouts (Windows incluido),
+# para que Prettier (endOfLine: lf) y los gates pasen igual en cada plataforma.
+* text=auto eol=lf
